@@ -32,6 +32,7 @@ namespace PomodoroKata.Domain
             State = PomodoroState.Started;
             CountDown = new CountDown(Duration);
             CountDown.Start();
+            Interruptions = 0;
         }
         public void UpdateCountDown(Duration deltaDuration)
         {
@@ -57,10 +58,5 @@ namespace PomodoroKata.Domain
         public void Resume()=>
             CountDown.Resume();
 
-        public void Restart()
-        {
-            Start();
-            Interruptions = 0;
-        }
     }
 }
