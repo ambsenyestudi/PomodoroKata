@@ -2,6 +2,7 @@
 {
     public enum PomodoroState
     { 
-        None, Stopped
+        None, Stopped,
+        Started
     }
 }

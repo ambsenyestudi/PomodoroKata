@@ -29,5 +29,12 @@ namespace PomodoroKata.Test
             var expectedState = PomodoroState.Stopped;
             Assert.Equal(expectedState, sut.State);
         }
+        [Fact]
+        public void BeStartCountDownWhenStarted()
+        {
+            var sut = new Pomodoro();
+            sut.Start();
+            Assert.True(sut.CountDown>0);
+        }
     }
 }
