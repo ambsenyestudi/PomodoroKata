@@ -60,6 +60,7 @@ namespace PomodoroKata.Domain
         public void Restart()
         {
             Start();
+            Interruptions = 0;
         }
     }
 }
