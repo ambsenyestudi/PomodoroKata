@@ -59,7 +59,7 @@ namespace PomodoroKata.Domain
 
         public void Restart()
         {
-            throw new NotImplementedException();
+            Start();
         }
     }
 }

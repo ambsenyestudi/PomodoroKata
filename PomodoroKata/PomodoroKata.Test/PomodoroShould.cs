@@ -133,7 +133,7 @@ namespace PomodoroKata.Test
             sut.Start();
             sut.UpdateCountDown(new Duration(1));
             sut.Restart();
-            Assert.Equal(duration, sut.CountDown);
+            Assert.Equal(duration, sut.CountDown.TotalMinutes);
         }
     }
 }
