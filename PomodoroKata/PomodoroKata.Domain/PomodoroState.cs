@@ -6,6 +6,7 @@
         Stopped,
         Started,
         Ended,
-        Running
+        Running,
+        Holding
     }
 }

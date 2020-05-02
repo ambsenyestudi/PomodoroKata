@@ -82,5 +82,19 @@ namespace PomodoroKata.Test
             
             Assert.Equal(expectedInterruptions, sut.Interruptions);
         }
+        [Theory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(3)]
+        public void CountInterruptions(int expectedInterruptions)
+        {
+            var sut = new Pomodoro();
+            sut.Start();
+            for (int i = 0; i < expectedInterruptions; i++)
+            {
+                sut.Hold();
+            }
+            Assert.Equal(expectedInterruptions, sut.Interruptions);
+        }
     }
 }

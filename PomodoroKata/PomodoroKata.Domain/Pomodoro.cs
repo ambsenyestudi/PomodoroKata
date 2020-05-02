@@ -48,5 +48,10 @@ namespace PomodoroKata.Domain
                 State = PomodoroState.Running;
             }
         }
+
+        public void Hold()
+        {
+            State = PomodoroState.Holding;
+        }
     }
 }
