@@ -58,5 +58,10 @@ namespace PomodoroKata.Domain
             CountDownState = CountDownState.OnHold;
             Interruptions += 1;
         }
+
+        public void Resume()
+        {
+            CountDownState = CountDownState.Running;
+        }
     }
 }

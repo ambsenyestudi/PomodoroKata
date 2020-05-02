@@ -118,9 +118,10 @@ namespace PomodoroKata.Test
             var sut = new Pomodoro(duration);
             sut.Start();
             sut.UpdateCountDown(new Duration(1));
-            var beforeHoldCountDown = sut.CountDown;
-            sut.Hold();
+            sut.Hold(); 
             sut.UpdateCountDown(new Duration(1));
+            sut.Resume();
+            sut.UpdateCountDown(new Duration(2));
             Assert.Equal(0,sut.CountDown);
         }
     }
