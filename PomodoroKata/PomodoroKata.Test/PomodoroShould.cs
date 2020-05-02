@@ -1,4 +1,5 @@
 using PomodoroKata.Domain;
+using PomodoroKata.Domain.CountDowns;
 using System;
 using Xunit;
 

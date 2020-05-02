@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PomodoroKata.Domain.CountDowns;
+using System;
 
 namespace PomodoroKata.Domain
 {
@@ -6,9 +7,9 @@ namespace PomodoroKata.Domain
     {
         public const int DEFAULT_MINUTES = 25;
         public Duration Duration { get; }
-        public Duration CountDown { get; set; }
+        public CountDown CountDown { get; set; }
         public PomodoroState State { get; private set; }
-        public CountDownState CountDownState { get; private set; }
+        public CountDownState CountDownState { get => CountDown.State; }
         public int Interruptions { get; private set; }
 
         public Pomodoro(Duration durationInMinutes=null)
@@ -19,7 +20,7 @@ namespace PomodoroKata.Domain
 
         private Duration ProcessDuration(Duration durationInMinutes)
         {
-            CountDown = new Duration(0);
+            CountDown = new CountDown(0);
             if (durationInMinutes==null)
             {
                 return (Duration)DEFAULT_MINUTES;
@@ -29,39 +30,31 @@ namespace PomodoroKata.Domain
         public void Start() 
         {
             State = PomodoroState.Started;
-            CountDownState = CountDownState.Started;
-            CountDown = new Duration(Duration);
+            CountDown = new CountDown(Duration);
+            CountDown.Start();
         }
-        public void UpdateCountDown(Duration delatDuration)
+        public void UpdateCountDown(Duration deltaDuration)
         {
             if(State!=PomodoroState.Started)
             {
                 throw new InvalidOperationException("Pomodor can not be updated if not started previously");
             }
-            if(CountDownState == CountDownState.Started)
+
+            CountDown = CountDown.Update(CountDown, deltaDuration);
+
+            if (CountDown.State == CountDownState.Ended)
             {
-                CountDownState = CountDownState.Running;
-            }
-            if (CountDownState == CountDownState.Running)
-            {
-                CountDown = Duration.FromMillis(CountDown.TotalMilliseconds - delatDuration.TotalMilliseconds);
-                if (CountDown.TotalMilliseconds <= 0)
-                {
-                    State = PomodoroState.Ended;
-                    CountDownState = CountDownState.Ended;
-                }
+                State = PomodoroState.Ended;
             }
         }
 
         public void Hold()
         {
-            CountDownState = CountDownState.OnHold;
+            CountDown.Hold();
             Interruptions += 1;
         }
 
-        public void Resume()
-        {
-            CountDownState = CountDownState.Running;
-        }
+        public void Resume()=>
+            CountDown.Resume();
     }
 }
