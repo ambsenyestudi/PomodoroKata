@@ -3,10 +3,8 @@
     public enum PomodoroState
     { 
         None, 
-        Stopped,
         Started,
         Ended,
-        Running,
-        Holding
+        Standing,
     }
 }

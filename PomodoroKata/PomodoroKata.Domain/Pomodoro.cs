@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace PomodoroKata.Domain
 {
@@ -9,12 +8,13 @@ namespace PomodoroKata.Domain
         public Duration Duration { get; }
         public Duration CountDown { get; set; }
         public PomodoroState State { get; private set; }
+        public CountDownState CountDownState { get; private set; }
         public int Interruptions { get; private set; }
 
         public Pomodoro(Duration durationInMinutes=null)
         {
             Duration = ProcessDuration(durationInMinutes);
-            State = PomodoroState.Stopped;
+            State = PomodoroState.Standing;
         }
 
         private Duration ProcessDuration(Duration durationInMinutes)
@@ -29,6 +29,7 @@ namespace PomodoroKata.Domain
         public void Start() 
         {
             State = PomodoroState.Started;
+            CountDownState = CountDownState.Started;
             CountDown = new Duration(Duration);
         }
         public void UpdateCountDown(Duration delatDuration)
@@ -37,21 +38,25 @@ namespace PomodoroKata.Domain
             {
                 throw new InvalidOperationException("Pomodor can not be updated if not started previously");
             }
-            
-            CountDown = Duration.FromMillis(CountDown.TotalMilliseconds - delatDuration.TotalMilliseconds);
-            if(CountDown.TotalMilliseconds<=0)
+            if(CountDownState == CountDownState.Started)
             {
-                State = PomodoroState.Ended;
+                CountDownState = CountDownState.Running;
             }
-            else
+            if (CountDownState == CountDownState.Running)
             {
-                State = PomodoroState.Running;
+                CountDown = Duration.FromMillis(CountDown.TotalMilliseconds - delatDuration.TotalMilliseconds);
+                if (CountDown.TotalMilliseconds <= 0)
+                {
+                    State = PomodoroState.Ended;
+                    CountDownState = CountDownState.Ended;
+                }
             }
         }
 
         public void Hold()
         {
-            State = PomodoroState.Holding;
+            CountDownState = CountDownState.OnHold;
+            Interruptions += 1;
         }
     }
 }

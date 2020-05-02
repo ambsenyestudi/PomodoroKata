@@ -26,7 +26,7 @@ namespace PomodoroKata.Test
         public void BeStoppedWhenCreated()
         {
             var sut = new Pomodoro();
-            var expectedState = PomodoroState.Stopped;
+            var expectedState = PomodoroState.Standing;
             Assert.Equal(expectedState, sut.State);
         }
         [Fact]
@@ -64,12 +64,12 @@ namespace PomodoroKata.Test
         [Fact]
         public void NotEndWhenTimeLeft()
         {
-            var expectedState = PomodoroState.Running;
+            var expectedState = CountDownState.Running;
             var duration = new Duration(2);
             var sut = new Pomodoro(duration);
             sut.Start();
             sut.UpdateCountDown(new Duration(1));
-            Assert.Equal(expectedState, sut.State);
+            Assert.Equal(expectedState, sut.CountDownState);
         }
 
         [Fact]
@@ -82,6 +82,7 @@ namespace PomodoroKata.Test
             
             Assert.Equal(expectedInterruptions, sut.Interruptions);
         }
+
         [Theory]
         [InlineData(1)]
         [InlineData(2)]
@@ -95,6 +96,19 @@ namespace PomodoroKata.Test
                 sut.Hold();
             }
             Assert.Equal(expectedInterruptions, sut.Interruptions);
+        }
+
+        [Fact]
+        public void NotUpdateIfOnHold()
+        {
+            var duration = new Duration(3);
+            var sut = new Pomodoro(duration);
+            sut.Start();
+            sut.UpdateCountDown(new Duration(1));
+            var beforeHoldCountDown = sut.CountDown;
+            sut.Hold();
+            sut.UpdateCountDown(new Duration(1));
+            Assert.Equal(beforeHoldCountDown, sut.CountDown);
         }
     }
 }
