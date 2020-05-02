@@ -9,7 +9,7 @@ namespace PomodoroKata.Domain
         public Duration Duration { get; }
         public Duration CountDown { get; set; }
         public PomodoroState State { get; private set; }
-        public int Interruptions { get => throw new NotImplementedException(); }
+        public int Interruptions { get; private set; }
 
         public Pomodoro(Duration durationInMinutes=null)
         {
