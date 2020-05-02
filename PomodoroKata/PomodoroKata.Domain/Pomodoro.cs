@@ -28,11 +28,5 @@ namespace PomodoroKata.Domain
             State = PomodoroState.Started;
             CountDown = new Duration(Duration);
         }
-
-        public void Stop()
-        {
-
-            throw new InvalidOperationException();
-        }
     }
 }

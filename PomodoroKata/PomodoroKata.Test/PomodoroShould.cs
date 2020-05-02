@@ -44,11 +44,5 @@ namespace PomodoroKata.Test
             
             Assert.Equal(exptectedMinutes, sut.CountDown);
         }
-        [Fact]
-        public void CanNotStopIfNotStarted()
-        {
-            var sut = new Pomodoro();
-            Assert.Throws<InvalidOperationException>(()=>sut.Stop());
-        }
     }
 }
