@@ -40,6 +40,10 @@ namespace PomodoroKata.Domain
             {
                 State = PomodoroState.Ended;
             }
+            else
+            {
+                State = PomodoroState.Running;
+            }
         }
     }
 }

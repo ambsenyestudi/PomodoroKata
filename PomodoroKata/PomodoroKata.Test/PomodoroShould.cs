@@ -64,7 +64,7 @@ namespace PomodoroKata.Test
         [Fact]
         public void NotEndWhenTimeLeft()
         {
-            var expectedState = PomodoroState.Ended;
+            var expectedState = PomodoroState.Running;
             var duration = new Duration(2);
             var sut = new Pomodoro(duration);
             sut.Start();
