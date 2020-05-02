@@ -22,5 +22,12 @@ namespace PomodoroKata.Test
             var sut = new Pomodoro(duration);
             Assert.Equal(exptectedMinutes, sut.Duration);
         }
+        [Fact]
+        public void BeStoppedWhenCreated()
+        {
+            var sut = new Pomodoro();
+            var expectedState = PomodoroState.Stopped;
+            Assert.Equal(expectedState, sut.State);
+        }
     }
 }

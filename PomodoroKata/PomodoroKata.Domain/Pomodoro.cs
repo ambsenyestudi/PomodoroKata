@@ -6,6 +6,7 @@ namespace PomodoroKata.Domain
     {
         public const int DEFAULT_MINUTES = 25;
         public Duration Duration { get; }
+        public PomodoroState State { get; private set; }
         public Pomodoro(Duration durationInMinutes=null)
         {
             Duration = ProcessDuration(durationInMinutes);
