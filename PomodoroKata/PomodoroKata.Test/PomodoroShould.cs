@@ -36,5 +36,13 @@ namespace PomodoroKata.Test
             sut.Start();
             Assert.True(sut.CountDown>0);
         }
+        [Fact]
+        public void Have0CountDownWhenCreated()
+        {
+            var exptectedMinutes = 0;
+            var sut = new Pomodoro();
+            
+            Assert.Equal(exptectedMinutes, sut.CountDown);
+        }
     }
 }
