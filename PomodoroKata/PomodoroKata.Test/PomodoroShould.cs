@@ -61,5 +61,15 @@ namespace PomodoroKata.Test
             sut.UpdateCountDown(duration);
             Assert.Equal(expectedState, sut.State);
         }
+        [Fact]
+        public void NotEndWhenTimeLeft()
+        {
+            var expectedState = PomodoroState.Ended;
+            var duration = new Duration(2);
+            var sut = new Pomodoro(duration);
+            sut.Start();
+            sut.UpdateCountDown(new Duration(1));
+            Assert.Equal(expectedState, sut.State);
+        }
     }
 }
