@@ -51,5 +51,15 @@ namespace PomodoroKata.Test
             var sut = new Pomodoro(duration);
             Assert.Throws<InvalidOperationException>(() => sut.UpdateCountDown(duration));
         }
+        [Fact]
+        public void EndWhenRunsOut()
+        {
+            var expectedState = PomodoroState.Ended;
+            var duration = new Duration(1);
+            var sut = new Pomodoro(duration);
+            sut.Start();
+            sut.UpdateCountDown(duration);
+            Assert.Equal(expectedState, sut.State);
+        }
     }
 }
