@@ -10,6 +10,7 @@ namespace PomodoroKata.Domain
         public Pomodoro(Duration durationInMinutes=null)
         {
             Duration = ProcessDuration(durationInMinutes);
+            State = PomodoroState.Stopped;
         }
 
         private Duration ProcessDuration(Duration durationInMinutes)
