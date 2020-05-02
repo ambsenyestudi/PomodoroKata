@@ -30,6 +30,10 @@ namespace PomodoroKata.Domain
         }
         public void UpdateCountDown(Duration delatDuration)
         {
+            if(State!=PomodoroState.Started)
+            {
+                throw new InvalidOperationException("Pomodor can not be updated if not started previously");
+            }
             
             CountDown = Duration.FromMillis(CountDown.TotalMilliseconds - delatDuration.TotalMilliseconds);
         }
