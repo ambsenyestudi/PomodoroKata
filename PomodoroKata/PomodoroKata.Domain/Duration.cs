@@ -2,11 +2,11 @@
 {
     public class Duration
     {
-        private const int SECONDS_IN_A_MINUTE = 60;
-        private const int MILLIS_IN_A_SECOND = 1000;
-        public int TotalMilliseconds { get; private set;}
+        public const int SECONDS_IN_A_MINUTE = 60;
+        public const int MILLIS_IN_A_SECOND = 1000;
+        public int TotalMilliseconds { get; protected set;}
         public int TotalMinutes { get => TotalMilliseconds / SECONDS_IN_A_MINUTE / MILLIS_IN_A_SECOND; }
-        private Duration()
+        protected Duration()
         {
 
         }
