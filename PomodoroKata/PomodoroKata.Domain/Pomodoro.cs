@@ -29,9 +29,9 @@ namespace PomodoroKata.Domain
         }
         public void Start() 
         {
-            State = PomodoroState.Started;
             CountDown = new CountDown(Duration);
             CountDown.Start();
+            UpdateStateFromCountDownState(CountDown.State);
             Interruptions = 0;
         }
         public void UpdateCountDown(Duration deltaDuration)
@@ -42,10 +42,21 @@ namespace PomodoroKata.Domain
             }
 
             CountDown = CountDown.Update(CountDown, deltaDuration);
+            UpdateStateFromCountDownState(CountDown.State);
+            
+        }
 
-            if (CountDown.State == CountDownState.Ended)
+        private void UpdateStateFromCountDownState(CountDownState countDownState)
+        {
+            
+            if (countDownState == CountDownState.Ended)
             {
                 State = PomodoroState.Ended;
+            }
+            else if(countDownState == CountDownState.Running ||
+                    countDownState == CountDownState.OnHold)
+            {
+                State = PomodoroState.Started;
             }
         }
 
@@ -58,5 +69,10 @@ namespace PomodoroKata.Domain
         public void Resume()=>
             CountDown.Resume();
 
+        public void Restart()
+        {
+            Start();
+            
+        }
     }
 }
