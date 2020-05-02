@@ -36,6 +36,10 @@ namespace PomodoroKata.Domain
             }
             
             CountDown = Duration.FromMillis(CountDown.TotalMilliseconds - delatDuration.TotalMilliseconds);
+            if(CountDown.TotalMilliseconds<=0)
+            {
+                State = PomodoroState.Ended;
+            }
         }
     }
 }
