@@ -4,10 +4,20 @@ namespace PomodoroKata.Domain
 {
     public class Pomodoro
     {
-        public int DurationInMinutes { get; set; }
-        public Pomodoro(int minutes=25)
+        public const int DEFAULT_MINUTES = 25;
+        public Duration Duration { get; }
+        public Pomodoro(Duration durationInMinutes=null)
         {
-            DurationInMinutes = minutes;
+            Duration = ProcessDuration(durationInMinutes);
+        }
+
+        private Duration ProcessDuration(Duration durationInMinutes)
+        {
+            if(durationInMinutes==null)
+            {
+                return (Duration)DEFAULT_MINUTES;
+            }
+            return durationInMinutes;
         }
     }
 }

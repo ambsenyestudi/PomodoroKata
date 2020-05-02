@@ -9,16 +9,18 @@ namespace PomodoroKata.Test
         [Fact]
         public void Last25MinutesByDefault()
         {
+            var exptectedMinutes = 25;
             var sut = new Pomodoro();
-            var exptectedDuration = 25;
-            Assert.Equal(exptectedDuration, sut.DurationInMinutes);
+            
+            Assert.Equal(exptectedMinutes, sut.Duration);
         }
         [Fact]
         public void BeOfAnyDuration()
         {
-            var exptectedDuration = 45;
-            var sut = new Pomodoro(exptectedDuration);
-            Assert.Equal(exptectedDuration, sut.DurationInMinutes);
+            var exptectedMinutes = 45;
+            var duration = new Duration(exptectedMinutes);
+            var sut = new Pomodoro(duration);
+            Assert.Equal(exptectedMinutes, sut.Duration);
         }
     }
 }
