@@ -26,6 +26,7 @@ namespace PomodoroKata.Domain
         public void Start() 
         {
             State = PomodoroState.Started;
+            CountDown = new Duration(Duration);
         }
     }
 }
