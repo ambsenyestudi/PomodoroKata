@@ -56,5 +56,10 @@ namespace PomodoroKata.Domain
 
         public void Resume()=>
             CountDown.Resume();
+
+        public void Restart()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
