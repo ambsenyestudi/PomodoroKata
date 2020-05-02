@@ -135,5 +135,17 @@ namespace PomodoroKata.Test
             sut.Restart();
             Assert.Equal(duration, sut.CountDown.TotalMinutes);
         }
+        [Fact]
+        public void RestartWith0Interruptions()
+        {
+            var expectedInterrutions = 0;
+            var duration = new Duration(3);
+            var sut = new Pomodoro(duration);
+            sut.Start();
+            sut.UpdateCountDown(new Duration(1));
+            sut.Hold();
+            sut.Restart();
+            Assert.Equal(expectedInterrutions, sut.Interruptions);
+        }
     }
 }
